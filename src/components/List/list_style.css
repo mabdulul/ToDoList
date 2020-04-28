@@ -27,14 +27,15 @@ ul li {
 
 /* Create a custom checkbox */
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 16px;
-    width: 16px;
     background-color: transparent;
     border: 1px solid grey;
-    border-radius: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 16px;
 }
 
 /* On mouse-over, add a grey background color */
@@ -43,7 +44,7 @@ ul li {
 /* When the checkbox is checked, add a blue background */
 .list_box:hover input~.checkmark,
 .list_box input:checked~.checkmark {
-    background-color: gray;
+    background-color: hsla(0, 0%, 50.2%, .2);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -61,13 +62,15 @@ ul li {
 
 /* Style the checkmark/indicator */
 .list_box .checkmark:after {
-    left: 9px;
+
+    left: 4px;
     top: 5px;
-    width: 5px;
-    height: 4px;
-    border: solid white;
-    border-width: 0 1px 1px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+    width: 6px;
+    height: 3px;
+    border: .9px solid grey;
+    border-top: none;
+    border-right: none;
+
+    position: absolute;
+    transform: rotate(-45deg);
 }
