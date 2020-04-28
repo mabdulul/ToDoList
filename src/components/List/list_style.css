@@ -1,0 +1,73 @@
+ul li {
+    list-style-type: none;
+}
+
+/* The list_box */
+.list_box {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.list_box input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 100%;
+}
+
+/* On mouse-over, add a grey background color */
+
+
+/* When the checkbox is checked, add a blue background */
+.list_box:hover input~.checkmark,
+.list_box input:checked~.checkmark {
+    background-color: gray;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.list_box input:checked~.checkmark:after,
+.list_box input:hover~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.list_box .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 4px;
+    border: solid white;
+    border-width: 0 1px 1px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
