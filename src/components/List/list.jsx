@@ -5,9 +5,29 @@ import moment from "moment";
 
 const List = () => {
 	const [ListArray, setListArray] = useState([]);
-	const [task, setTask] = useState("");
+	let [task, setTask] = useState("");
+	console.log("Line 9 ", task);
+
+	const [active, setActive] = useState(false);
 	const [plusAddTaskView, setplusAddTaskView] = useState(true);
 
+	// This Activating the Red Button when typing
+
+	const ActivatingtheRedButton = (e) => {
+		const thetask = e;
+
+		if (thetask.length === 0) {
+			setActive(false);
+		} else if (thetask.length > 0) {
+			setActive(true);
+		}
+	};
+
+	const handleChange = (e) => {
+		const thetask = e.target.value;
+		setTask(thetask);
+		ActivatingtheRedButton(thetask);
+	};
 	const day = moment();
 	const today = day.format("MMM Do");
 	const theDayWeek = day.format("ddd MMM Do");
@@ -23,10 +43,11 @@ const List = () => {
 		];
 		setListArray([...theCheckBox, ...ListArray]);
 		setTask("");
+		ActivatingtheRedButton("");
 	};
+
 	const completeItem = (e) => {
 		const itemcomplete = e.target.value;
-
 		setListArray(ListArray.filter((obj) => obj.key !== itemcomplete));
 		ListArray.filter((obj) => obj.key !== itemcomplete);
 	};
@@ -36,20 +57,22 @@ const List = () => {
 			<div className="row">
 				<div className="col-sm-12 col-md-4 col-lg-3"></div>
 				<div className="col-sm-12 col-md-8 col-lg-9">
-					<h2>Inbox</h2>
-					<div className="list">
-						<ul>
+					<header className="list_header">
+						<h1>Inbox</h1>
+					</header>
+					<div>
+						<ul className="list">
 							{ListArray.map((i) => (
 								<li key={i.key}>
 									<label className="list_box">
-										{i.text}
 										<input
 											type="checkbox"
 											className="list_check"
 											value={i.key}
 											onClick={completeItem}
 										/>
-										<span className="checkmark"></span>
+										<div className="checkmark"></div>
+										<div className="list_text">{i.text}</div>
 									</label>
 								</li>
 							))}
@@ -71,14 +94,16 @@ const List = () => {
 									<input
 										type="text"
 										value={task}
-										onChange={(e) => setTask(e.target.value)}
+										onChange={handleChange}
 										placeholder="e.g Learn Portuguese in Atlanta"
 									></input>
 								</div>
 								<span>
 									Today <span>&#8231;</span> {theDayWeek}
 								</span>
-								<button type="submit">Add Task</button>
+								<button className={active ? " btn_red" : " "} type="submit">
+									Add Task
+								</button>
 								<button onClick={() => setplusAddTaskView(true)}>Cancel</button>
 
 								{today}
